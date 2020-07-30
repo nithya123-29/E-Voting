@@ -1,0 +1,5 @@
+1. Can we use external tool to capture the packets 
+	Wireshark
+	Cain and Abel
+	CommView
+2. If we have to do programmatically, can you give us few programs which works with wifi. Bcoz we are getting just the programs which uses the ethernet cable and we dont have ethernet cable actually.

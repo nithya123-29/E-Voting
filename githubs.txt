@@ -3,3 +3,6 @@ https://github.com/phaethon/kamene
 https://github.com/avicoder/Sniffer
 https://github.com/O-Luhishi/Python-Packet-Sniffer/blob/master/Packet-Sniffer.py
 https://github.com/alexis-ld/pycket
+
+https://github.com/jshearer/wifi-sniffer
+https://github.com/Geovation/wifispy
