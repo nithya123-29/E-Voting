@@ -1,0 +1,48 @@
+Future enhancements
+1. Avoid the sites which can be hacked easily
+2. 
+
+
+Research component
+1. Avoid Intrusion Detection through the analysis
+
+Users
+Network Administrator
+
+The proposed tool captures the packets and allows the users to monitor and analyze the traffic in wifi or ethernet in order avoid intrusion.
+
+Python to call shell script
+import subprocess
+subprocess.call(['sh', './test.sh'])
+
+
+
+
+
+Introduction
+Purpose
+Existing System and Learnings
+Proposed System (Interface and Modules)
+Users and Modifications in the Existing system
+Language Tool
+Future Enhancement
+Demonstration of Project
+
+
+Shell Script
+Java / Python
+Cloud
+Github
+
+
+3-niv
+4-man
+5-nit
+6-niv
+7-man
+8-nit
+9-niv
+10-niv
+11-nit
+12-not needed
+13-nit,man
