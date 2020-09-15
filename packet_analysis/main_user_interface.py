@@ -23,7 +23,7 @@ class UI(Frame):
     def openND(self):
         os.system('python3 Network_Diagnosticer.py')
     def OpenSettingTools(self):
-        os.system('python3 Interface\ Setting.py')
+        os.system('python3 Interface_Setting.py')
 
 
 

@@ -45,5 +45,5 @@ class UI(Frame):
 
 SUI=UI()
 SUI.master.title("Setting")
-SUI.master.geometry('400x300')
+SUI.master.geometry('600x300')
 SUI.mainloop()

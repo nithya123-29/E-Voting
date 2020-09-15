@@ -49,7 +49,7 @@ class CAP_UI(Frame):
         file = open("C:/Program Files/Wireshark/A.txt", 'w')  # 'w' mode will erase all the text in the file when it's opened by the program
         file.write("Capture time:10 \n")  # Write the Capture time to the txt file so that the reading will know how long does the capture last
         file.close()
-        ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -i Wi-Fi -a -w firstcapturedpackets.pcap -F pcap duration:10')  # Cause tshark is in C:\Program Files\Wireshark, so before it's executed in CMD, we need to change the location first.
+        ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -i Wi-Fi -w firstcapturedpackets.pcap -F pcap -a duration:10')  # Cause tshark is in C:\Program Files\Wireshark, so before it's executed in CMD, we need to change the location first.
         # ExecuteCMD('"C:\Program Files\Wireshark" & tshark -r "firstcapturedpackets.pcap" -t ad > "A.txt"')
         ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -r firstcapturedpackets.pcap -t ad > firstcapturedpackets.txt')
         # ExecuteCMD('"pushd C:\Program Files\Wireshark" & tail -c +25 firstcapturedpackets.txt >> A.txt')
