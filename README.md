@@ -23,7 +23,9 @@ This is a windows project. This tool is developed using python. The UI is develo
 4. Reader.py - will take the captured packet text file, read the captured packets, provide the statistics and provide the visualization for the pcap file.
 
 **Default Login Credentials**
+
 ID - admin
+
 Password - password
 
   
