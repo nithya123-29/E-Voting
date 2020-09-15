@@ -15,9 +15,8 @@ class CAP_UI(Frame):
         self.ButtWidgets()
 
     def ButtWidgets(self):
-        self.SixtysButton = Button(self, text='Capture 10 Seconds',
-                                   command=self.CheckInterfaceAndCap)  # Capture the packet for 10 seconds by using the CheckInterfaceAndCap() method
-        self.SixtysButton.pack()
+        self.TensButton = Button(self, text='Capture 10 Seconds',command=self.CheckInterfaceAndCap)  # Capture the packet for 10 seconds by using the CheckInterfaceAndCap() method
+        self.TensButton.pack()
         self.Timeinput = Entry(self)
         self.Timeinput.pack()
         self.TimeinputButton = Button(self,
@@ -49,10 +48,8 @@ class CAP_UI(Frame):
         file = open("C:/Program Files/Wireshark/A.txt", 'w')  # 'w' mode will erase all the text in the file when it's opened by the program
         file.write("Capture time:10 \n")  # Write the Capture time to the txt file so that the reading will know how long does the capture last
         file.close()
-        ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -i Wi-Fi -w firstcapturedpackets.pcap -F pcap -a duration:10')  # Cause tshark is in C:\Program Files\Wireshark, so before it's executed in CMD, we need to change the location first.
-        # ExecuteCMD('"C:\Program Files\Wireshark" & tshark -r "firstcapturedpackets.pcap" -t ad > "A.txt"')
+        ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -i WiFi -w firstcapturedpackets.pcap -F pcap -a duration:10')  # Cause tshark is in C:\Program Files\Wireshark, so before it's executed in CMD, we need to change the location first.
         ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -r firstcapturedpackets.pcap -t ad > firstcapturedpackets.txt')
-        # ExecuteCMD('"pushd C:\Program Files\Wireshark" & tail -c +25 firstcapturedpackets.txt >> A.txt')
         fin = open("C:/Program Files/Wireshark/firstcapturedpackets.txt", "r")
         data2 = fin.read()
         fin.close()
@@ -71,7 +68,6 @@ class CAP_UI(Frame):
         file.close()
         ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -i Ethernet -w firstcapturedpackets.pcap -F pcap -a duration:10')
         ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -r firstcapturedpackets.pcap -t ad > firstcapturedpackets.txt')
-        # ExecuteCMD('"pushd C:\Program Files\Wireshark" & tail -c +25 firstcapturedpackets.txt >> A.txt')
         fin = open("C:/Program Files/Wireshark/firstcapturedpackets.txt", "r")
         data2 = fin.read()
         fin.close()
@@ -100,7 +96,6 @@ class CAP_UI(Frame):
         ExecuteCMD(command)
 
         ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -r firstcapturedpackets.pcap -t ad > firstcapturedpackets.txt')
-        # ExecuteCMD('"pushd C:\Program Files\Wireshark" & tail -c +25 firstcapturedpackets.txt >> A.txt')
         fin = open("C:/Program Files/Wireshark/firstcapturedpackets.txt", "r")
         data2 = fin.read()
         fin.close()
@@ -137,7 +132,7 @@ class CAP_UI(Frame):
         Text = "Capture time:" + str(time_Cap)
         file.write(Text + ' \n')
         file.close()
-        command = '"pushd C:\Program Files\Wireshark" & tshark -i Wi-Fi -w firstcapturedpackets.pcap -F pcap -a duration:' + str(time_Cap)
+        command = '"pushd C:\Program Files\Wireshark" & tshark -i WiFi -w firstcapturedpackets.pcap -F pcap -a duration:' + str(time_Cap)
         ExecuteCMD(command)
         ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -r firstcapturedpackets.pcap -t ad > firstcapturedpackets.txt')
         # ExecuteCMD('"pushd C:\Program Files\Wireshark" & tail -c +25 firstcapturedpackets.txt >> A.txt')

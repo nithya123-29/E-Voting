@@ -10,10 +10,13 @@ class UI(Frame):
         self.pack(expand=True)
         self.inputUI()
     def inputUI(self):
+        # the label for bandwidth
+        self.bandwidth = Label(self, text="Bandwidth")
+        self.bandwidth.pack()
         self.BandWidthInput=Entry(self)
         self.BandWidthInput.pack()
-        self.ComfirmAction=Button(self,text='Confirm',command=self.Change)
-        self.ComfirmAction.pack()
+        self.ConfirmAction=Button(self,text='Confirm',command=self.Change)
+        self.ConfirmAction.pack()
     def Change(self):
         UserProfile=open('Bandwidth.txt','w')
         Bandwidth=self.BandWidthInput.get()

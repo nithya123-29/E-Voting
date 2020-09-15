@@ -9,8 +9,14 @@ class UI(Frame):        #This class is used to define the GUI interface
         self.pack(expand=True)                # Build the interface, "expand=True" will let the main interface be in the middle if user maximize it
         self.createWidgets()
     def createWidgets(self):
+        # the label for user_name
+        self.user_name = Label(self, text="Username")
+        self.user_name.pack()
         self.UNinput=Entry(self)    #Build a input box that allows user to input the username
         self.UNinput.pack()         #Pack the input box
+        # the label for user_password
+        self.user_password = Label(self, text="Password")
+        self.user_password.pack()
         self.PPinput=Entry(self,show='*')   #Build a input box that alloows user to input the password. show='*' will let the password input by user shown as '*' for security
         self.PPinput.pack()         #Pack the input box
         self.loginbutton=Button(self,text='Login',command=self.hello)              #Build a Login Button and execute the self "hello" method if the user press it

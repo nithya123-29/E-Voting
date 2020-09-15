@@ -12,11 +12,17 @@ class ChangeUNPPui(Frame):              #Use the class to define the GUI
         self.CheckForSafe()
     def CheckForSafe(self):
         messagebox.showinfo('Message','For Security, please enter your username and password')  #Inform to user that they need to input the username and password
+        # the label for current user_name
+        self.user_name = Label(self, text="Current User Name")
+        self.user_name.pack()
         self.UNSinput=Entry(self)
-        self.PPSinput=Entry(self,show='*')
         self.UNSinput.pack()
+        # the label for current user_password
+        self.user_password = Label(self, text="Current Password")
+        self.user_password.pack()
+        self.PPSinput=Entry(self,show='*')
         self.PPSinput.pack()
-        self.Checkbutton=Button(self,text='Comfirm',command=self.CheckInput)
+        self.Checkbutton=Button(self,text='Confirm',command=self.CheckInput)
         self.Checkbutton.pack()
     def CheckInput(self):
         usernameC=self.UNSinput.get()

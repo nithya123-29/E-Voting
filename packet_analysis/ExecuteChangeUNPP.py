@@ -8,12 +8,21 @@ class EGUI(Frame):          #Use the class to make the GUI
         self.pack(expand=True)
         self.UI()
     def UI(self):
+        # the label for new user_name
+        self.user_name = Label(self, text="New User Name")
         self.NewUNinput=Entry(self)         #Input box for username
+        # the label for new user_password
+        self.user_password = Label(self, text="New Password")
         self.NewPPinput=Entry(self,show='*')    #Input box for password
+        # the label for compare user_password
+        self.compare_password = Label(self, text="Confirm Password")
         self.ComPPinput=Entry(self,show='*')    #Input box for repeat password
-        self.CheckButton=Button(self,text='Comfirm',command=self.NEW_Com)   
+        self.CheckButton=Button(self,text='Confirm',command=self.NEW_Com)
+        self.user_name.pack()
         self.NewUNinput.pack()
+        self.user_password.pack()
         self.NewPPinput.pack()
+        self.compare_password.pack()
         self.ComPPinput.pack()
         self.CheckButton.pack()
 

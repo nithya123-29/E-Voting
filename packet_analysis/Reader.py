@@ -50,7 +50,7 @@ class ReaderUI(Frame):
         Num_Of_Size_Of_UDP=0
         Num_Of_Size_Of_ICMP=0
         buffer=[['' for i in range(2)] for j in range(40)]          #Create a two-dimension array to store the source MAC address of the broadcast packet and the number of packets send by them
-        for x in range (40):                                        
+        for x in range (40):
             buffer[x][1]=0
         while line!='':                     #Equal to While not EOF
             if "Broadcast" in line:         #If the type of the packet is broadcast
@@ -72,8 +72,8 @@ class ReaderUI(Frame):
                         buffer[n][1]+=1
                         buffer_addr=""
             if "TCP" in line:           #If the type of the packet is TCP
-                if "SYN" in line:       #If this TCP packet is a SYN packet
-                    Num_Of_TCPSYN+=1    #This number is used to check if the computer system is being TCP SYN Flood Attack
+                # if "SYN" in line:       #If this TCP packet is a SYN packet
+                #     Num_Of_TCPSYN+=1    #This number is used to check if the computer system is being TCP SYN Flood Attack
                 TCP_Size=""
                 Index_TCP=line.find("TCP",0)
                 Index_TCP+=4
@@ -109,14 +109,16 @@ class ReaderUI(Frame):
                 Num_Of_Size_Of_ICMP+=int(ICMP_Size)
                 
             line=file.readline()                            #Start reading the next line
-        REPORT=self.Report(Num_Of_Broadcast,Num_Of_TCPSYN,Num_Of_Size_Of_UDP,Num_Of_Size_Of_ICMP,Num_Of_Size_Of_TCP,buffer) #Send these information to the mathod called "REPORT" to analyse these figures
+        # REPORT=self.Report(Num_Of_Broadcast,Num_Of_TCPSYN,Num_Of_Size_Of_UDP,Num_Of_Size_Of_ICMP,Num_Of_Size_Of_TCP,buffer) #Send these information to the mathod called "REPORT" to analyse these figures
+        REPORT=self.Report(Num_Of_Broadcast,Num_Of_Size_Of_UDP,Num_Of_Size_Of_ICMP,Num_Of_Size_Of_TCP,buffer) #Send these information to the mathod called "REPORT" to analyse these figures
         messagebox.showinfo("Report",REPORT)        #Return a report that includes the statistics of the packet capturing to user
         file.close()
 
 
 
 
-    def Report(self,Broadcast,TCP,UDP,ICMP,TCP_Size,Broadcast_List):
+    # def Report(self,Broadcast,TCP,UDP,ICMP,TCP_Size,Broadcast_List):
+    def Report(self,Broadcast,UDP,ICMP,TCP_Size,Broadcast_List):
         bandwidth_file=open('Bandwidth.txt')
         Bandwidth_Text=bandwidth_file.readline()
         Index_Bandwidth=10
@@ -127,13 +129,13 @@ class ReaderUI(Frame):
                 Bandwidth+=Bandwidth_Text[Index_Bandwidth]
                 Index_Bandwidth+=1
         else:
-            Bandwidth=28.9           #The average bandwidth of UK home network is 28.9 Mbps  (Source:ISPreview)
+            Bandwidth=32.01
         Bandwidth=float(Bandwidth)
         Data_Flow_Speed=12500*Bandwidth         #The unit of Data_Flow_Speed is in byte per second
-        if Bandwidth==28.9:
-            Bandwidth_Output="Bandwidth: 28.9 Mbps (Average number in UK)"
-        if Bandwidth!=28.9:
-            Bandwidth_Output="Bandwidth: "+str(Bandwidth)+ " Mbps (Average number in UK is 28.9 Mbps)"
+        if Bandwidth==32.01:
+            Bandwidth_Output="Bandwidth: 32.01 Mbps"
+        if Bandwidth!=32.01:
+            Bandwidth_Output="Bandwidth: "+str(Bandwidth)+ " Mbps"
         text_Broadcast=""
         text_TCP=""
         text_UDP=""
@@ -149,24 +151,24 @@ class ReaderUI(Frame):
         if Broadcast>=Time_Cap/0.1:
             text_Broadcast="If you feel your computer system is slow, the reason probably is the number of broadcast packet in your LAN network is too much.\n "
             Safe=False
-        if TCP>=Time_Cap/0.001:
-            text_TCP="If you feel your computer system is slow, the reason probably is you are being SYN Flood(A type of DDoS attack) attack.\n"
-            Safe=False
+        # if TCP>=Time_Cap/0.001:
+        #     text_TCP="If you feel your computer system is slow, the reason probably is you are being SYN Flood(A type of DDoS attack) attack.\n"
+        #     Safe=False
         if UDP>=Data_Flow_Speed*Time_Cap:
             text_UDP="If you fell your computer system if slow, the reason probably is you are being UDP Flood(A type of DDoS attack) attack or some software(or site) are using your network resources(Normally are the video sites).\n"
             Safe=False
         if TCP_Size>=Data_Flow_Speed*Time_Cap:
             text_TCP_S="If you feel your computer system is slow, the reason probably is you are being TCP flood attack or some software are transfering data(or site e.g video sites)"
             Safe=False
-        statistics="Number Of Broadcast packet is "+str(Broadcast)+"\n"+"Number of TCP SYN packets is "+str(TCP)+"""
-Number of Size of UDP packets is """+str(UDP)+"\n"+"Number of Size of ICMP packets is "+str(ICMP)+"\n"+"Number of Size of TCP packets is "+str(TCP_Size)+"\n"
+        # statistics="Number Of Broadcast packet is "+str(Broadcast)+"\n"+"Number of TCP SYN packets is "+str(TCP)+"""Number of Size of UDP packets is """+str(UDP)+"\n"+"Number of Size of ICMP packets is "+str(ICMP)+"\n"+"Number of Size of TCP packets is "+str(TCP_Size)+"\n"
+        statistics = "Number Of Broadcast packet is " + str(Broadcast) + "\n" + """Number of Size of UDP packets is """ + str(UDP) + "\n" + "Number of Size of ICMP packets is " + str(ICMP) + "\n" + "Number of Size of TCP packets is " + str(TCP_Size) + "\n"
         if Safe==True:
             # DDoS_report=Bandwidth_Output+'\n'+"Time Captured:"+str(Time_Cap)+'\n'+statistics+"\nWoooh, it seens that your computer doen't being DDoS Attack"+"\n"+text_Broadcast_List
-            DDoS_report = Bandwidth_Output + '\n' + "Time Captured:" + str(Time_Cap) + '\n' + statistics
+            report = Bandwidth_Output + '\n' + "Time Captured:" + str(Time_Cap) + '\n' + statistics
         else:
             # DDoS_report=Bandwidth_Output+'\n'+"Time Captured:"+str(Time_Cap)+'\n'+statistics+"\n"+text_Broadcast+text_TCP+text_UDP+text_TCP_S+"\n"+text_Broadcast_List
-            DDoS_report = Bandwidth_Output + '\n' + "Time Captured:" + str(Time_Cap) + '\n' + statistics
-        return DDoS_report
+            report = Bandwidth_Output + '\n' + "Time Captured:" + str(Time_Cap) + '\n' + statistics
+        return report
 
 
             
