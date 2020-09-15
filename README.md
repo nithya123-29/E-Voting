@@ -22,5 +22,9 @@ This is a windows project. This tool is developed using python. The UI is develo
 3. main_user_interface - It consist of an option to change the interface and bandwidth if required. And if everything is fine they can go to network_diagnosticer page.
 4. Reader.py - will take the captured packet text file, read the captured packets, provide the statistics and provide the visualization for the pcap file.
 
+**Default Login Credentials**
+ID - admin
+Password - password
+
   
     
