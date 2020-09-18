@@ -55,7 +55,7 @@ for protoc, count in cntProto.most_common():
 
 
 print(table1)
-print("17 - UDP\n 6 - TCP\n 1 - ICMP")
+print("17 - UDP\n 6 - TCP\n 1 - ICMP \n 2 - IGMP")
 
 
 plotly.offline.plot({"data":[plotly.graph_objs.Bar(x=xData, y=yData)], "layout":plotly.graph_objs.Layout(title="Source IP Occurrence", xaxis=dict(title="Src IP"), yaxis=dict(title="Count"))},image='jpeg', image_filename='srcIPOccurance')
@@ -67,8 +67,10 @@ for protoc, count in cntProto.most_common():
         protoc = 'UDP'
     elif protoc == 6:
         protoc = 'TCP'
-    else:
+    elif protoc == 1:
         protoc = 'ICMP'
+    else:
+        protoc = 'IGMP'
     x1Data.append(protoc)
     y1Data.append(count)
 plotly.offline.plot({"data":[plotly.graph_objs.Bar(x=x1Data, y=y1Data)], "layout":plotly.graph_objs.Layout(title="Frequently Occured Protocol", xaxis=dict(title="Protocols"), yaxis=dict(title="Count"))},image='jpeg', image_filename='frequencyProtocol')

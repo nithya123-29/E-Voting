@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Whatever you Want your title to be</title>
+        <script>
+            function reader()
+            {
+                x = document.getElementById('fileToRead');
+                console.log(this.x[0].mozFullPath);
+
+            }
+        </script>
+    </head>
+    <body>
+        <input type="file" id="fileToRead" accept=".txt">
+        <button onclick="reader()">Read</button>
+    </body>
+</html>

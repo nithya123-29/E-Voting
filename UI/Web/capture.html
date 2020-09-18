@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Capture</title>
+    <script type="text/javascript" src="/eel.js"></script>
+</head>
+<body>
+    <button onclick="capture()">Capture</button>
+    <script>
+        async function capture()
+        {
+            await eel.CheckInterfaceAndCap()();
+        }
+    </script>
+</body>
+</html>
