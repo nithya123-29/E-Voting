@@ -7,10 +7,26 @@
 </head>
 <body>
     <button onclick="capture()">Capture</button>
+    <input type="file" name="inputfile" id="inputfile">
+    <pre id="CapturedData">
+
+    </pre>
     <script>
+        const fileSelector = document.getElementById('file-selector');
+        document.getElementById('inputfile').addEventListener('change', function() {
+            var fr=new FileReader();
+            fr.onload=function(){
+                document.getElementById('CapturedData')
+                        .textContent=fr.result;
+            }
+
+            fr.readAsText(this.files[0]);
+        })
+
         async function capture()
         {
             await eel.CheckInterfaceAndCap()();
+            alert("Capture is Finished");
         }
     </script>
 </body>

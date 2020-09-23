@@ -3,6 +3,8 @@ import tkinter.messagebox as messagebox
 import time
 import os
 import shutil
+import graph
+import Reader
 import eel
 
 eel.init('Web')
@@ -205,6 +207,13 @@ def OpenTshark_Any_Any(self, interface, time_Cap):
 def ExecuteCMD(command):
     os.system(command)
 
+def Graph():
+    report = graph.Graph()
+    return report
+
+def reader():
+    report = Reader.Reading()
+    return report
 
 # UI = CAP_UI()
 # UI.master.title('Capture program')
