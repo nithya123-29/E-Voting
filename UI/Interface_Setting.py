@@ -22,19 +22,19 @@ class UI(Frame):
         self.InputAndSetButton.pack()
 
     def SetAsWifi(self):
-        UserProfile=open("User.txt", 'w')
+        UserProfile=open("User.txt",'w')
         UserProfile.write("Capture Interface=Wi-Fi")
         UserProfile.close()
         messagebox.showinfo("Message","Success")
 
     def SetAsEthernet(self):
-        UserProfile=open("User.txt", 'w')
+        UserProfile=open("User.txt",'w')
         UserProfile.write("Capture Interface=Ethernet")
         UserProfile.close()
         messagebox.showinfo("Message","Success")
 
     def SetAsInput(self):
-        UserProfile=open("User.txt", 'w')
+        UserProfile=open("User.txt",'w')        
         Name_Of_Interface=self.InputInterface.get()
         String_To_Write="Capture Interface="+str(Name_Of_Interface)+" \n"
         UserProfile.write(String_To_Write)      #Wrtie the name of the interface to the file to let the capture program to read it

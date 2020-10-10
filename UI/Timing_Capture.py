@@ -1,18 +1,19 @@
+import subprocess
 from tkinter import *
 import tkinter.messagebox as messagebox
 import time
+from ReaderStat import Reading
 import os
 import shutil
-import graph
-import Reader
 import eel
 
 eel.init('Web')
+
+
 # In this module, the user interface only includes two buttons and one input box
 # The button above is used to capture the program with 10 seconds
 # If the user want to capture the packets for other times, they can input a number in the text box and press the lowest button
 # class CAP_UI(Frame):
-
 def __init__(self, master=None):
     Frame.__init__(self, master)
     self.pack(expand=True)
@@ -33,9 +34,9 @@ def CheckInterfaceAndCap():
     checkfile = open("User.txt")
     line = checkfile.readline()  # Get the name of the network interface input by the user in the interface configuration program
     if line == "Capture Interface=Wi-Fi":
-        OpenTshark_WiFi()  # Using OpenTshark_WiFi() method to capture packets via Wi-Fi
+        capturedPackets = OpenTshark_WiFi()  # Using OpenTshark_WiFi() method to capture packets via Wi-Fi
         checkfile.close()  # Close the file
-        return 0  # The purpose of return 0 is return a value and end this method so that the program will not continue (Or otherwise the program will capture twice because of the else statement)
+        return capturedPackets  # The purpose of return 0 is return a value and end this method so that the program will not continue (Or otherwise the program will capture twice because of the else statement)
     if line == "Capture Interface=Ethernet":
         OpenTshark_Ethernet()  # Using OpenTshark_Ethernet() method to capture packets via Ethernet
         checkfile.close()
@@ -67,7 +68,22 @@ def OpenTshark_WiFi():
     # messagebox.showinfo('Message',
     #                     'Capture is Finished, please close the program and open the reader to analyse')  # Return a message to user and inform them that the capture is finished.
     print('Capture is Finished, please close the program and open the reader to analyse')
-def OpenTshark_Ethernet(self):
+    # line = subprocess.check_output(['tail', '-1', "D:/CapSyslog/firstcapturedpackets.txt"])
+    # words = []
+    # words = line.split(' ')
+    # return words
+    with open("D:/CapSyslog/firstcapturedpackets.txt", "r") as file:
+        # first_line = file.readline()
+        for last_line in file:
+            pass
+    words = []
+    words = last_line.split(' ')
+
+    while ('' in words):
+        words.remove('')
+    return words[0]
+
+def OpenTshark_Ethernet():
     file = open("C:/Program Files/Wireshark/A.txt", 'w')  # 'w' mode will erase all the text in the file when it's opened by the program
     file.write("Capture time:10 \n")  # Write the Capture time to the txt file so that the reading will know how long does the capture last
     file.close()
@@ -85,7 +101,8 @@ def OpenTshark_Ethernet(self):
     # ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -r "firstcapturedpackets.pcap" -t ad > "A.txt"')
     messagebox.showinfo('Message', 'Capture is Finished, please close the program and open the reader to analyse')
 
-def OpenTshark_Any(self, interface):
+
+def OpenTshark_Any(interface):
     file = open("C:/Program Files/Wireshark/A.txt", 'w')  # 'w' mode will erase all the text in the file when it's opened by the program
     file.write("Capture time:10 \n")  # Write the Capture time to the txt file so that the reading will know how long does the capture last
     file.close()
@@ -114,25 +131,25 @@ def OpenTshark_Any(self, interface):
     messagebox.showinfo('Message', 'Capture is Finished, please close the program and open the reader to analyse')
 
 # Similar to the method CheckInterfaceAndCap(), but here, it take the time input by user as a parameter of the capturing methods
-def CheckInterfaceAndCap_Any(self):
+def CheckInterfaceAndCap_Any():
     checkfile = open("User.txt")
     line = checkfile.readline()
-    time = self.Timeinput.get()
+    time = Timeinput.get()
     if line == "Capture Interface=Wi-Fi":
-        self.OpenTshark_WiFi_Any(time)
+        OpenTshark_WiFi_Any(time)
         checkfile.close()
         return 0
     if line == "Capture Interface=Ethernet":
-        self.OpenTshark_Ethernet_Any(time)
+        OpenTshark_Ethernet_Any(time)
         checkfile.close()
         return 0
     else:
-        self.OpenTshark_Any_Any(line, time)
+        OpenTshark_Any_Any(line, time)
         checkfile.close()
         return 0
 
 # Similar to the Capturing methods above but here it takes time_Cap as the parameter
-def OpenTshark_WiFi_Any(self, time_Cap):
+def OpenTshark_WiFi_Any(time_Cap):
     file = open("C:/Program Files/Wireshark/A.txt", 'w')
     Text = "Capture time:" + str(time_Cap)
     file.write(Text + ' \n')
@@ -153,7 +170,7 @@ def OpenTshark_WiFi_Any(self, time_Cap):
     # ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -r "firstcapturedpackets.pcap" -t ad > "firstcapturedpackets.txt"')
     messagebox.showinfo('Message', 'Capture is Finished, please close the program and open the reader to analyse')
 
-def OpenTshark_Ethernet_Any(self, time_Cap):
+def OpenTshark_Ethernet_Any(time_Cap):
     file = open("C:/Program Files/Wireshark/A.txt", 'w')
     Text = "Capture time:" + str(time_Cap)
     file.write(Text + ' \n')
@@ -174,7 +191,7 @@ def OpenTshark_Ethernet_Any(self, time_Cap):
     # ExecuteCMD('"pushd C:\Program Files\Wireshark" & tshark -r "firstcapturedpackets.pcap" -t ad > "A.txt"')
     messagebox.showinfo('Message', 'Capture is Finished, please close the program and open the reader to analyse')
 
-def OpenTshark_Any_Any(self, interface, time_Cap):
+def OpenTshark_Any_Any(interface, time_Cap):
     file = open("C:/Program Files/Wireshark/A.txt", 'w')
     Text = "Capture time:" + str(time_Cap)
     file.write(Text + ' \n')
@@ -207,13 +224,11 @@ def OpenTshark_Any_Any(self, interface, time_Cap):
 def ExecuteCMD(command):
     os.system(command)
 
-def Graph():
-    report = graph.Graph()
+@eel.expose
+def reader():
+    report = Reading()
     return report
 
-def reader():
-    report = Reader.Reading()
-    return report
 
 # UI = CAP_UI()
 # UI.master.title('Capture program')

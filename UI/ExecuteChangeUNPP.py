@@ -1,7 +1,7 @@
 from tkinter import *
 import tkinter.messagebox as messagebox
 import hashlib
-filename= 'unpp.txt'  #The location of the file
+filename='unpp.txt'         #The location of the file
 class EGUI(Frame):          #Use the class to make the GUI
     def __init__(self,master=None):
         Frame.__init__(self,master)

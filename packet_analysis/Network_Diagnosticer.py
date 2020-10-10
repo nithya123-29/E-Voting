@@ -17,7 +17,7 @@ class DUI(Frame):
     def OpenCap(self):
         os.system('python3 Timing_Capture.py')
     def OpenReader(self):
-        os.system('python3 Reader.py')
+        os.system('python3 ReaderStat.py')
     
 UI=DUI()
 UI.master.title('Network Diagnosticer')

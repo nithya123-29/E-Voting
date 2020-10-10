@@ -18,7 +18,7 @@ class UI(Frame):
         self.ConfirmAction=Button(self,text='Confirm',command=self.Change)
         self.ConfirmAction.pack()
     def Change(self):
-        UserProfile=open('Bandwidth.txt', 'w')
+        UserProfile=open('Bandwidth.txt','w')
         Bandwidth=self.BandWidthInput.get()
         try:
             Bandwidth=int(Bandwidth)
